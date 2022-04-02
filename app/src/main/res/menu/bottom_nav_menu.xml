@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/title_home"
+        />
+
+    <item
+        android:id="@+id/navigation_calories"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/search_food"
+        />
+
+    <item android:id="@+id/navigation_belly"
+        android:icon="@drawable/ascites__1_"
+          android:title="@string/title_belly"
+        />
+
+    <item
+        android:id="@+id/navigation_bmi"
+        android:icon="@drawable/body_mass_index"
+        android:title="@string/title_BMI" />
+
+
+
+
+</menu>

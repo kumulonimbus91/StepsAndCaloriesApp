@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel"
+            type="com.nenadvukojevic.stepsandcaloriesapp.viewmodel.SharedViewModel"/>
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/pozzpozadina"
+        >
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent = "0.05" />
+
+
+
+            <ImageView
+                android:id="@+id/back_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/ll_steps_and_cal"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/guideline2"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_baseline_arrow_circle_left_24"/>
+
+            <LinearLayout
+                android:id="@+id/ll_steps_and_cal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/llprogress"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:fontFamily="cursive"
+                    android:gravity="center"
+                    android:text="Steps"
+                    android:textColor="@color/white"
+                    android:textSize="35dp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:fontFamily="cursive"
+                    android:gravity="center"
+                    android:text="Calories"
+                    android:textColor="@color/white"
+                    android:textSize="35dp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llprogress"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintBottom_toTopOf="@+id/cv1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                            android:id="@+id/progress_bar_steps"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:layout_centerInParent="true"
+                            android:indeterminate="false"
+                            app:cpb_background_progressbar_color="@color/grey"
+                            app:cpb_background_progressbar_color_direction="left_to_right"
+                            app:cpb_background_progressbar_width="18dp"
+                            app:cpb_indeterminate_mode="false"
+                            android:background="@drawable/untitled_12"
+                            app:cpb_progress_direction="to_right"
+                            app:cpb_progressbar_color="@color/black"
+                            app:cpb_progressbar_color_direction="left_to_right"
+                            app:cpb_progressbar_color_end="@color/colorEndColorProgressBar1"
+                            app:cpb_progressbar_color_start="@color/colorStartColorProgressBar1"
+                            app:cpb_progressbar_width="17dp"
+                            app:cpb_round_border="true" />
+
+                        <TextView
+                            android:id="@+id/number_of_steps"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/white"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            tools:text="0" />
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                            android:id="@+id/progress_bar_calories"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:layout_centerInParent="true"
+                            android:indeterminate="false"
+                            app:cpb_background_progressbar_color="@color/grey"
+                            app:cpb_background_progressbar_color_direction="left_to_right"
+                            app:cpb_background_progressbar_width="18dp"
+                            app:cpb_indeterminate_mode="false"
+                            android:background="@drawable/untitled_2"
+                            app:cpb_progress_direction="to_right"
+                            app:cpb_progressbar_color="@color/black"
+                            app:cpb_progressbar_color_direction="left_to_right"
+                            app:cpb_progressbar_color_end="@color/colorEndColorProgressBar2"
+                            app:cpb_progressbar_color_start="@color/colorStartColorProgressBar2"
+                            app:cpb_progressbar_width="17dp"
+                            app:cpb_round_border="true"
+                            tools:progress="80" />
+
+                        <TextView
+                            android:id="@+id/number_of_calories"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/white"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            tools:text="0"
+
+                            />
+
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv1"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/steps_percentage_of_goal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:text="450% of Goal" />
+
+                    <TextView
+                        android:id="@+id/calories_percentage_of_goal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:text="450% of Goal" />
+
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/cv1"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="@drawable/border"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="39dp"
+                        android:layout_weight="1"
+                        android:text="@string/long_press_circle_to_reset"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_weight="1"
+                        android:text="@string/midnight_reset"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:textStyle="normal" />
+
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:elevation="10dp"
+            app:layout_constraintCircleRadius="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/cv2">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                >
+
+                <LinearLayout
+                    android:id="@+id/llfirst"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/llsecond"
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent">
+
+                    <ImageView
+                        android:id="@+id/img_fire"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_baseline_local_fire_department_24" />
+
+                    <TextView
+                        android:id="@+id/txt_view_kcal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/marginAlign"
+                        android:layout_weight="2"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="@string/calories_burned"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_calories_burned"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/marginStart"
+                        android:layout_weight="1"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/llsecond"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/llthird"
+                    app:layout_constraintTop_toBottomOf="@+id/llfirst">
+
+                    <ImageView
+                        android:id="@+id/img_steps"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_baseline_directions_walk_24" />
+
+                    <TextView
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/marginAlign"
+                        android:layout_weight="2"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="@string/total_steps"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_total_steps"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/marginStart"
+                        android:layout_weight="1"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/llthird"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/llsecond">
+
+                    <ImageView
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_baseline_food_bank_24" />
+
+                    <TextView
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/marginAlign"
+                        android:layout_weight="2"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="Total Calories"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_total_calories"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/marginStart"
+                        android:layout_weight="1"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

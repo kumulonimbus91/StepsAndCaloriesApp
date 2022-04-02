@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/pozzpozadina"
+    tools:context=".view.fragments.BMIFragment"
+    >
+
+    <RadioGroup
+        android:id="@+id/rgUnits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_margin="10dp"
+
+        android:background="@drawable/drawable_radio_group_tab_background"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbMetricUnits"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="0.50"
+            android:background="@drawable/drawable_units_tab_selector"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="METRIC UNITS"
+            android:textColor="@drawable/drawable_units_tab_text_color_selector"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/rbUsUnits"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="0.50"
+            android:background="@drawable/drawable_units_tab_selector"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:text="US UNITS"
+            android:textColor="@drawable/drawable_units_tab_text_color_selector"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/llUnitsView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rgUnits"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/llMetricUnitsView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilMetricUnitWeight"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:textColorHint="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etMetricUnitWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/weight_in_kg"
+                    android:textColor="@color/black"
+                    android:inputType="number"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilMetricUnitHeight"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:textColorHint="@color/black"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etMetricUnitHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/height_in_cm"
+                    android:textColor="@color/black"
+                    android:inputType="number"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llUsUnitsView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilUsUnitWeight"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:textColorHint="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etUsUnitWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:hint="WEIGHT (in lbs)"
+                    android:inputType="number"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/llUsUnitsHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <!--Here the BaselineAligned is When set to false, prevents the layout from aligning its children's
+                 baselines. This attribute is particularly useful when the children
+                 use different values for gravity. The default value is true.-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilUsUnitHeightFeet"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    android:textColorHint="@color/black"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etUsUnitHeightFeet"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Feet"
+                        android:inputType="number"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilUsUnitHeightInch"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    android:textColorHint="@color/black"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etUsUnitHeightInch"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Inch"
+                        android:textColorHint="@color/white"
+                        android:inputType="number"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilage"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:textColorHint="@color/black"
+            android:layout_marginTop="10dp"
+
+            >
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etAge"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:hint="Age"
+                android:inputType="number"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/llradioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:visibility="visible"
+            tools:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Select your gender"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:id="@+id/rg_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rb_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/buttonSelected"
+                    android:text="Male"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif"
+                    android:textSize="22sp"
+                    />
+                <RadioButton
+                    android:id="@+id/rb_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/buttonSelected"
+                    android:text="Female"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif"
+                    android:textSize="22sp"
+                    tools:ignore="UsingOnClickInXml" />
+
+
+
+
+
+
+            </RadioGroup>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Select your goal"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:id="@+id/rg_goal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rb_lose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:buttonTint="@color/buttonSelected"
+                    android:text="Mild weight loss"
+                    android:fontFamily="sans-serif"
+                    android:textSize="22sp"
+                    tools:ignore="UsingOnClickInXml" />
+                <RadioButton
+                    android:id="@+id/rb_lose_heavy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:buttonTint="@color/buttonSelected"
+                    android:text="Heavy weight loss"
+                    android:fontFamily="sans-serif"
+                    android:textSize="22sp"
+                     />
+                <RadioButton
+                    android:id="@+id/rb_maintain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:buttonTint="@color/buttonSelected"
+                    android:fontFamily="sans-serif"
+                    android:text="Maintain weight"
+                    android:textSize="22sp"
+                     />
+
+
+
+
+
+
+            </RadioGroup>
+
+
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/gradient_background"
+                android:text="@string/submit"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>
+</layout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

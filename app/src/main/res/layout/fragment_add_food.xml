@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel"
+            type="com.nenadvukojevic.stepsandcaloriesapp.viewmodel.AddFoodViewModel"/>
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/pozzpozadina"
+        tools:context=".addFood.AddFoodFragment">
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guid_add_food_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="5dp"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guid_add_food_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="5dp"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guid_add_food_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="5dp"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guid_add_food_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="5dp"/>
+
+        <TextView
+            android:id="@+id/tv_food_name"
+            android:text="@{viewModel.selectedFood.layoutName}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginTop="70dp"
+            app:layout_constraintTop_toTopOf="@id/guid_add_food_top"
+            app:layout_constraintStart_toStartOf="@id/guid_add_food_start"
+            app:layout_constraintEnd_toStartOf="@id/guid_add_food_end"
+            app:layout_constraintHorizontal_bias="0.0"
+            tools:text="@string/foodname"
+            style="@style/addfood_name"/>
+        <TextView
+            android:id="@+id/tv_kcal_per_100"
+            android:text="@{viewModel.displayKcalPer100G}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/default_margin_half"
+            app:layout_constraintStart_toStartOf="@id/guid_add_food_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_food_name"
+            tools:text="200 kcal per 100g"
+            style="@style/addfood_desc"/>
+
+        <LinearLayout
+            android:id="@+id/lly_chart"
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/default_margin"
+            android:weightSum="@{viewModel.selectedFood.nutrients.sumPercent + 2}"
+            app:layout_constraintTop_toBottomOf="@id/tv_kcal_per_100"
+            app:layout_constraintStart_toStartOf="@id/guid_add_food_start"
+            app:layout_constraintEnd_toStartOf="@id/guid_add_food_end"
+            >
+
+            <LinearLayout
+                android:id="@+id/chart_value_carbs"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="@{viewModel.selectedFood.nutrients.carbsPercent}"
+                android:orientation="horizontal"
+                android:background="@color/colorStartColorProgressBar1"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"/>
+
+            <LinearLayout
+                android:id="@+id/chart_value_proteins"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="@{viewModel.selectedFood.nutrients.proteinPercent}"
+                android:orientation="horizontal"
+                android:background="@color/Yellow"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"/>
+            <LinearLayout
+                android:id="@+id/chart_value_fats"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="@{viewModel.selectedFood.nutrients.fatPercent}"
+                android:orientation="horizontal"
+                android:background="@color/colorStartColorProgressBar2"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lly_nutrients"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            android:background="@drawable/llbackground"
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintTop_toBottomOf="@id/lly_chart"
+            app:layout_constraintStart_toStartOf="@id/guid_add_food_start"
+            app:layout_constraintEnd_toStartOf="@id/guid_add_food_end">
+
+            <!--CARBS-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/label_carbs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_carbs"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorStartColorProgressBar1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="18sp"
+                    style="@style/addfood_label_carbs"/>
+
+                <TextView
+                    android:id="@+id/tv_current_carbs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorStartColorProgressBar1"
+                    android:text="@{viewModel.displayCurrentCarbs}"
+                    app:layout_constraintTop_toBottomOf="@id/label_carbs"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="10 g"
+                    style="@style/addfood_tv_nutrient"/>
+
+                <TextView
+                    android:id="@+id/tv_percent_carbs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorStartColorProgressBar1"
+                    android:text="@{viewModel.displayCarbsPercent}"
+                    app:layout_constraintTop_toBottomOf="@id/tv_current_carbs"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="5%"
+                    style="@style/addfood_tv_nutrient_precent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--PROTEINS-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/label_proteins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_proteins"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/Yellow"/>
+
+                <TextView
+                    android:id="@+id/tv_current_proteins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="@{viewModel.displayCurrentProteins}"
+                    app:layout_constraintTop_toBottomOf="@id/label_proteins"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/Yellow"
+                    android:textSize="18sp"
+                    tools:text="12 g"
+                    style="@style/addfood_tv_nutrient"/>
+
+                <TextView
+                    android:id="@+id/tv_percent_proteins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="@{viewModel.displayProteinsPercent}"
+                    app:layout_constraintTop_toBottomOf="@id/tv_current_proteins"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/Yellow"
+                    android:textSize="18sp"
+                    tools:text="5%"
+                    style="@style/addfood_tv_nutrient_precent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--FATS-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/label_fats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="@string/label_fats"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/fatsC"/>
+
+                <TextView
+                    android:id="@+id/tv_current_fats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/fatsC"
+                    android:text="@{viewModel.displayCurrentFats}"
+                    app:layout_constraintTop_toBottomOf="@id/label_fats"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="32 g"
+                    style="@style/addfood_tv_nutrient"/>
+
+                <TextView
+                    android:id="@+id/tv_percent_fats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/fatsC"
+                    android:text="@{viewModel.displayFatsPercent}"
+                    app:layout_constraintTop_toBottomOf="@id/tv_current_fats"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="5%"
+                    style="@style/addfood_tv_nutrient_precent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <!--Total-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2">
+                <TextView
+                    android:id="@+id/label_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_total"
+                    android:layout_marginTop="@dimen/default_margin_half"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    style="@style/addfood_label_total"/>
+
+                <TextView
+                    android:id="@+id/tv_current_kcal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.displayCurrentTotalKcal}"
+                    android:layout_marginBottom="@dimen/default_margin_half"
+                    app:layout_constraintTop_toBottomOf="@id/label_total"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    style="@style/addfood_tv_nutrient"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lly_enter_grams"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/default_margin"
+            android:weightSum="3"
+            app:layout_constraintTop_toBottomOf="@id/lly_nutrients"
+            app:layout_constraintStart_toStartOf="@id/guid_add_food_start"
+            app:layout_constraintEnd_toStartOf="@id/guid_add_food_end">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.8"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Enter serving in grams"
+                android:gravity="center_vertical"
+                style="@style/addfood_label_enter"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:maxLength="3"
+                android:gravity="center_vertical"
+                app:boxStrokeColor="@color/defaultBottomNav"
+                app:boxCornerRadiusTopStart="@dimen/box_corner_rounded"
+                app:boxCornerRadiusTopEnd="@dimen/box_corner_rounded"
+                app:boxCornerRadiusBottomStart="@dimen/box_corner_rounded"
+                app:boxCornerRadiusBottomEnd="@dimen/box_corner_rounded"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:inputType="numberSigned"
+                    android:id="@+id/addfood_current_grams"
+                    android:background="@drawable/search_input_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textCursorDrawable="@null"
+                    android:drawableEnd="@drawable/ic_weight_scale"
+                    android:text="@={viewModel.currentGramsString}"
+                    android:maxLines="1"
+                    android:maxLength="4"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="20dp"
+            tools:ignore="MissingConstraints">
+
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/save_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/AddFood"
+                android:layout_gravity="bottom"
+                android:textColor="@color/white"
+                android:onClick="@{() -> viewModel.onAddFoodSave()}"
+                android:padding="10dp"
+                app:cornerRadius="16dp"
+                android:background="@drawable/gradient_background"
+
+                />
+
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

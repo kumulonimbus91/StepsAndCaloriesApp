@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/navigation_home">
+
+    <action android:id="@+id/action_global_homeFragment"
+        app:destination="@id/navigation_home"
+        app:launchSingleTop="true" />
+
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.nenadvukojevic.stepsandcaloriesapp.view.fragments.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home">
+        <argument
+            android:name="selectedFood"
+            app:argType="com.nenadvukojevic.stepsandcaloriesapp.model.entities.Food" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_calories"
+        android:name="com.nenadvukojevic.stepsandcaloriesapp.view.fragments.CaloriesFragment"
+        android:label="@string/title_calories"
+        tools:layout="@layout/fragment_calories" >
+        <action
+            android:id="@+id/action_calories_fragment_to_add_food_fr"
+            app:destination="@id/add_food_fr" />
+        <argument
+            android:name="selectedFood"
+            app:argType="com.nenadvukojevic.stepsandcaloriesapp.model.entities.Food" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/add_food_fr"
+        android:name="com.nenadvukojevic.stepsandcaloriesapp.view.fragments.AddFoodFragment"
+        android:label="@string/AddFood"
+        tools:layout="@layout/fragment_add_food" >
+        <argument
+            android:name="selectedFood"
+            app:argType="com.nenadvukojevic.stepsandcaloriesapp.model.entities.Food" />
+        <action
+            android:id="@+id/action_add_food_fr_to_bellyFragment"
+            app:destination="@id/navigation_belly" />
+
+
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_bmi"
+        android:name="com.nenadvukojevic.stepsandcaloriesapp.view.fragments.BMIFragment"
+        android:label="@string/title_BMI"
+        tools:layout="@layout/fragment_bmi" />
+    <fragment
+        android:id="@+id/navigation_belly"
+        android:name="com.nenadvukojevic.stepsandcaloriesapp.view.fragments.BellyFragment"
+        android:label="fragment_belly2"
+        tools:layout="@layout/fragment_belly" >
+        <action
+            android:id="@+id/action_to_home"
+            app:destination="@id/navigation_home"/>
+
+        <argument
+            android:name="selectedFood"
+            app:argType="com.nenadvukojevic.stepsandcaloriesapp.model.entities.Food" />
+    </fragment>
+
+
+</navigation>

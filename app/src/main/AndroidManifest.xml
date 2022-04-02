@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.nenadvukojevic.stepsandcaloriesapp">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+
+    <application
+        android:name=".ApplicationStepsAndCalories"
+        android:allowBackup="false"
+        android:fullBackupOnly="false"
+        android:icon="@drawable/avocado_icon_dark_03"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.StepsAndCaloriesApp">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4256849898367595~7602915087"/>
+
+
+
+
+        <activity android:name=".view.activities.SplashActivity"
+            android:configChanges="orientation"
+            android:label="@string/app_name_splash"
+            android:theme="@style/Theme.StepsAndCaloriesApp.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <receiver android:name=".helper.AlarmReceiver"
+            android:enabled="true"/>
+        <activity android:name=".view.activities.IntroActivity"
+            android:theme="@style/Theme.StepsAndCaloriesApp.NoActionBar">
+
+        </activity>
+
+
+        <activity
+            android:name=".view.activities.MainActivity"
+            android:label="@string/app_name"
+            >
+
+        </activity>
+
+
+
+    </application>
+
+</manifest>

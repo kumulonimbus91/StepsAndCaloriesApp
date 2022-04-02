@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">StepsAndCaloriesApp</string>
+    <string name="app_name_splash">Steps and Calories</string>
+    <string name="title_home">Home</string>
+    <string name="title_calories">Calories</string>
+    <string name="search_food">Search</string>
+    <string name="title_belly">Belly</string>
+    <string name="title_BMI">BMI</string>
+    <string name="submit">SUBMIT</string>
+    <string name="search">Search for food</string>
+    <string name="searchBtn">Search</string>
+    <string name="food_not_found">Food not found.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="label_carbs">Carbs</string>
+    <string name="label_proteins">Proteins</string>
+    <string name="label_fats">Fats</string>
+    <string name="label_total">Total</string>
+    <string name="label_kcal">kcal</string>
+
+    <string name="AddFood">Add food to belly</string>
+
+
+    <string name="display_kcal_per_100g">%,.0f kcal per 100g</string>
+
+    <string name="format_grams">%,.0f g</string>
+    <string name="format_total_kcal">%,.0f kcal</string>
+    <string name="format_double">%,.0f</string>
+    <string name="format_percent">%d %%</string>
+
+    <string name="foodname">Food Name</string>
+    <string name="weight_in_kg">WEIGHT (in kg)</string>
+    <string name="height_in_cm">HEIGHT (in cm)</string>
+    <string name="midnight_reset">Midnight reset</string>
+    <string name="long_press_circle_to_reset">Long press circle to reset</string>
+    <string name="calories_burned">Calories burned</string>
+    <string name="total_steps">Total steps</string>
+    <string name="back">Go back to intro page and insert data again</string>
+    <string name= "are_you_sure">Are you sure you want to go back to the intro page? All data will be lost</string>
+    <string name="lbl_yes">Yes</string>
+    <string name="lbl_no">No</string>
+    <string name="image_contentDescription">image</string>
+    <string name="item_text">Click on image for nutrition analysis</string>
+    <string name="kcal">kcal</string>
+    <string name="kcal2"><![CDATA[kcal ->]]></string>
+
+</resources>

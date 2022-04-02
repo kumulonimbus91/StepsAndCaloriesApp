@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/naslovna"
+        android:alpha="1.0"
+        android:gravity="center_horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <TextView
+            android:id="@+id/tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:text="@string/app_name_splash"
+            android:textColor="@color/white"
+            android:textSize="45sp"
+            android:fontFamily="cursive"
+            android:alpha="2"
+            android:singleLine="true"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+
+
+
+</layout>
+
