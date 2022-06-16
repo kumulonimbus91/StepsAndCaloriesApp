@@ -38,7 +38,6 @@ class HomeFragment : Fragment(), SensorEventListener {
 
     private lateinit var mBinding: FragmentHomeBinding
 
-
     private lateinit var sharedViewModel: SharedViewModel
 
     private lateinit var notificationManager: NotificationManager

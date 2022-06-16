@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/pozzpozadina"
+    android:background="@color/background"
     tools:context=".view.fragments.BMIFragment"
     >
 
@@ -19,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_margin="10dp"
-
         android:background="@drawable/drawable_radio_group_tab_background"
         android:orientation="horizontal">
 
@@ -69,16 +68,18 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilMetricUnitWeight"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:textColorHint="@color/black"
+                app:hintTextAppearance="@style/GreenTextInputLayout"
+                android:textColorHint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etMetricUnitWeight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/weight_in_kg"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
+                    android:background="@drawable/custom_input"
                     android:inputType="number"
                     android:textStyle="bold"
                     android:textSize="16sp" />
@@ -88,16 +89,17 @@
                 android:id="@+id/tilMetricUnitHeight"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:textColorHint="@color/black"
+                android:textColorHint="@color/white"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etMetricUnitHeight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:background="@drawable/custom_input"
                     android:hint="@string/height_in_cm"
-                    android:textColor="@color/black"
                     android:inputType="number"
                     android:textStyle="bold"
                     android:textSize="16sp" />
@@ -115,15 +117,16 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilUsUnitWeight"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:textColorHint="@color/black"
+                android:textColorHint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etUsUnitWeight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:background="@drawable/custom_input"
+                    android:textColor="@color/white"
                     android:hint="WEIGHT (in lbs)"
                     android:inputType="number"
                     android:textStyle="bold"
@@ -147,16 +150,18 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="55dp"
-                    android:textColorHint="@color/black"
+                    android:textColorHint="@color/white"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1">
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etUsUnitHeightFeet"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/custom_input"
                         android:hint="Feet"
                         android:inputType="number"
+                        android:textColor="@color/white"
                         android:textStyle="bold"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -166,15 +171,17 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="55dp"
-                    android:textColorHint="@color/black"
+                    android:textColorHint="@color/white"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1">
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etUsUnitHeightInch"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="Inch"
+                        android:textColor="@color/white"
+                        android:background="@drawable/custom_input"
                         android:textColorHint="@color/white"
                         android:inputType="number"
                         android:textStyle="bold"
@@ -190,16 +197,17 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/white"
             android:layout_marginTop="10dp"
 
             >
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etAge"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_input"
                 android:hint="Age"
                 android:inputType="number"
                 android:textStyle="bold"
@@ -323,7 +331,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/gradient_background"
+                android:background="@color/buttonDefaultBackground"
                 android:text="@string/submit"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />

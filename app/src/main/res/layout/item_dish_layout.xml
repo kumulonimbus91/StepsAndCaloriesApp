@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
+        android:background="@color/cv_backgrounds"
         android:layout_height="wrap_content">
 
 
@@ -29,6 +30,8 @@
             android:layout_height="wrap_content"
             tools:text="Banana"
             android:textStyle="bold"
+            android:textSize="26sp"
+            android:textColor="@color/white"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             style="@style/tv_overview_foodname"/>
@@ -38,7 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="100 g"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
+            android:textSize="22sp"
             android:layout_marginStart="@dimen/default_margin_half"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_item_overview_name"
             app:layout_constraintStart_toEndOf="@id/tv_item_overview_name"
@@ -48,7 +52,7 @@
             android:id="@+id/tv_item_overview_kcal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_item_overview_name"
             app:layout_constraintBottom_toTopOf="@id/guid_bottom"
@@ -60,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/kcal2"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_marginStart="@dimen/default_margin_half"
             app:layout_constraintStart_toEndOf="@id/tv_item_overview_kcal"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_item_overview_kcal"
@@ -75,6 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="50 g"
+            android:textSize="20sp"
             android:textColor="@color/colorStartColorProgressBar1"
             android:layout_marginStart="@dimen/default_margin_half"
             app:layout_constraintStart_toEndOf="@id/tv_kcal"
@@ -86,6 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="50 g"
+            android:textSize="20sp"
             android:textColor="@color/Yellow"
             android:layout_marginStart="@dimen/default_margin_half"
             app:layout_constraintStart_toEndOf="@id/tv_item_overview_carbs"
@@ -97,6 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="50 g"
+            android:textSize="20sp"
             android:textColor="@color/fatsC"
             android:layout_marginStart="@dimen/default_margin_half"
             app:layout_constraintStart_toEndOf="@id/tv_item_overview_proteins"

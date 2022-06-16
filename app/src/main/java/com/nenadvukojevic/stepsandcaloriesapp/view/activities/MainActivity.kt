@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navHostFragment: NavHostFragment
 
-
     private lateinit var mNavController: NavController
 
     private lateinit var context: Context

@@ -60,19 +60,21 @@ class SplashActivity : AppCompatActivity() {
                     sharedPrefs = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
 //                    val isFirstRun: SharedPreferences = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                     val firstTime: String? = sharedPrefs.getString("FirstLaunch", "Yes")
+                    val shared: SharedPreferences? =
+                        androidx.preference.PreferenceManager.getDefaultSharedPreferences(applicationContext)
 
-                    if (firstTime.equals("Yes")) {
-                        val intent = Intent(this@SplashActivity, IntroActivity::class.java)
-//                        val editor: SharedPreferences.Editor = sharedPrefs.edit()
+                    val genderDefault: String = "default"
+
+                    val gender: String? = shared?.getString("GENDER", "")
+
+                    if (shared?.getString("GENDER", null) == null) {
+                        //                        val editor: SharedPreferences.Editor = sharedPrefs.edit()
 //                        editor.putString("FirstLaunch", "No")
 //                        editor.apply()
+                        val intent = Intent(this@SplashActivity, IntroActivity::class.java)
                         startActivity(intent)
                         finish()
-
-
-
-
-                    } else {
+                        } else {
                         val intent = Intent (this@SplashActivity, MainActivity::class.java)
                         startActivity(intent)
                         finish()
