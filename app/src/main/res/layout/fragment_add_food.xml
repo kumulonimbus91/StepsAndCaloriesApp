@@ -128,7 +128,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="5"
-            android:background="@drawable/llbackground"
+            android:background="@color/cv_backgrounds"
             android:layout_marginTop="@dimen/default_margin"
             app:layout_constraintTop_toBottomOf="@id/lly_chart"
             app:layout_constraintStart_toStartOf="@id/guid_add_food_start"
@@ -380,8 +380,10 @@
                 android:textColor="@color/white"
                 android:onClick="@{() -> viewModel.onAddFoodSave()}"
                 android:padding="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
                 app:cornerRadius="16dp"
-                android:background="@drawable/gradient_background"
+                android:background="@color/buttonDefaultBackground"
 
                 />
 
