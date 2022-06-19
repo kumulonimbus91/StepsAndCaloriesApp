@@ -16,6 +16,5 @@ while the calorie counter will be reset every midnight or you can manually delet
 #NAVIGATION COMPONENT,
 #MVVM
 #EDAMAM API
-![Untitled-1-05](https://user-images.githubusercontent.com/69019613/161382745-79453582-1f97-4543-a80f-e37dcc83e5a9.png)
-![Untitled-1-01](https://user-images.githubusercontent.com/69019613/161382757-9859962c-4305-483b-a4cf-26da89ba8e47.png)
-![Untitled-1-03](https://user-images.githubusercontent.com/69019613/161382763-b364d5b1-0043-42d9-b214-b2e396616804.png)
+
+![mockup](https://user-images.githubusercontent.com/69019613/174460693-745f0e17-9426-45d6-bee2-020e093001e3.png)
