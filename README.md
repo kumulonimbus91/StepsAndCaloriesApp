@@ -1,5 +1,5 @@
 # StepsAndCaloriesApp
-Easy to use app that provides to user daily calorie and step counter,
+App that provides to user daily calorie and step counter,
 with close to 900,000 food items. Once you install the app you will be asked to provide your height,
 weight, age and goal regarding your weight (lose, maintain, lose heavy).
 You will be provided with an estimate daily calorie (Harris-Benedict formula) and steps number in relation
