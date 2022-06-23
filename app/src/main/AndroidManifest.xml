@@ -53,6 +53,10 @@
         </activity>
 
 
+        <service android:name="TrackingService"
+            />
+
+
 
     </application>
 

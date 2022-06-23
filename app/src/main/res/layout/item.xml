@@ -24,12 +24,15 @@
             android:id="@+id/iv_dish_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.8"
             android:layout_margin="@dimen/_1sdp"
             android:contentDescription="@string/image_contentDescription"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             tools:src="@drawable/ivan_torres_mquqbmszggm_unsplash"
              />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_background2"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_weight="2"
@@ -40,16 +43,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
+                android:alpha="1"
                 android:gravity="center_vertical"
                 android:textColor="@color/white"
                 android:textSize="28sp"
+                android:fontFamily="@font/poppins_semibold"
                 android:textStyle="bold"
                 tools:text="Dish Title" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
+                android:alpha="1"
                 android:textColor="@color/white"
+                android:fontFamily="@font/poppins_semibold"
                 android:textSize="16sp"
                 android:textStyle="normal"
                 android:text="@string/item_text" />

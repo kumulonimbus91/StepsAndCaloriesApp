@@ -80,7 +80,7 @@
                     android:textColorHint="@color/white"
                     android:inputType="numberDecimal"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 

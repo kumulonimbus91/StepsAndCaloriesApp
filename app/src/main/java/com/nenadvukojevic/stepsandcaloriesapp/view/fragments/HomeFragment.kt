@@ -26,10 +26,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.nenadvukojevic.stepsandcaloriesapp.R
+import com.nenadvukojevic.stepsandcaloriesapp.TrackingService
 import com.nenadvukojevic.stepsandcaloriesapp.databinding.FragmentHomeBinding
 import com.nenadvukojevic.stepsandcaloriesapp.model.database.FoodDatabase
+import com.nenadvukojevic.stepsandcaloriesapp.utils.Constants
 import com.nenadvukojevic.stepsandcaloriesapp.utils.SharedViewModelFactory
 import com.nenadvukojevic.stepsandcaloriesapp.view.activities.IntroActivity
+import com.nenadvukojevic.stepsandcaloriesapp.view.activities.MainActivity
 import com.nenadvukojevic.stepsandcaloriesapp.viewmodel.SharedViewModel
 
 
@@ -47,7 +50,6 @@ class HomeFragment : Fragment(), SensorEventListener {
     private var running: Boolean = false
 
 
-
     private var previousTotalSteps = 0f
 
     private var txtSteps: String? = null
@@ -60,8 +62,6 @@ class HomeFragment : Fragment(), SensorEventListener {
     }
 
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -72,26 +72,8 @@ class HomeFragment : Fragment(), SensorEventListener {
         mBinding.lifecycleOwner = this
 
 
-        // ___ instantiate intent ___ \\
-        //  Instantiate the intent declared globally - which will be passed to startService and stopService.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         sensorManager = activity?.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-
 
 
 
@@ -110,7 +92,7 @@ class HomeFragment : Fragment(), SensorEventListener {
         val dataSource = FoodDatabase.getInstance(application).foodDatabaseDao
         val shareViewModelFactory = SharedViewModelFactory(dataSource, application)
 
-//        sensorManager = activity?.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+
 
         if (ContextCompat.checkSelfPermission(
                 requireActivity(),
@@ -135,18 +117,7 @@ class HomeFragment : Fragment(), SensorEventListener {
         resetStepsManually()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+        sendCommandToService(Constants.ACTION_START_OR_RESUME_SERVICE)
 
 
         sharedViewModel =
@@ -184,7 +155,7 @@ class HomeFragment : Fragment(), SensorEventListener {
 
             val value = 0
 
-           val percentageSteps = percentageOfGoalSteps(totalSteps.toInt(), txtSteps!!.toInt())
+            val percentageSteps = percentageOfGoalSteps(totalSteps.toInt(), txtSteps!!.toInt())
             mBinding.stepsPercentageOfGoal.text = percentageSteps.toString() + "% of Goal"
             mBinding.tvCaloriesBurned.text = burnedCalories(totalSteps.toInt()).toString()
 
@@ -226,7 +197,7 @@ class HomeFragment : Fragment(), SensorEventListener {
 
 
 
-            sharedViewModel.foodTotal.observe(viewLifecycleOwner, {
+                sharedViewModel.foodTotal.observe(viewLifecycleOwner, {
 
 
                 mBinding.progressBarCalories.setProgressWithAnimation(it.kcal.toFloat()) //not int when kcal
@@ -259,8 +230,12 @@ class HomeFragment : Fragment(), SensorEventListener {
 
     }
 
-
-
+    private fun sendCommandToService(action: String) =
+        Intent(requireContext(), TrackingService::class.java).also {
+            it.action = action
+            it.putExtra("steps", totalSteps)
+            requireActivity().startService(it)
+        }
 
     fun backToIntro() {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireActivity())
@@ -302,10 +277,6 @@ class HomeFragment : Fragment(), SensorEventListener {
         // Set other dialog properties
         alertDialog.setCancelable(false) // Will not allow user to cancel after clicking on remaining screen area.
         alertDialog.show()  // show the dialog to UI
-        
-
-
-
 
 
     }
@@ -326,8 +297,6 @@ class HomeFragment : Fragment(), SensorEventListener {
         }
 
     }
-
-
 
 
     override fun onSensorChanged(event: SensorEvent?) {
@@ -354,6 +323,7 @@ class HomeFragment : Fragment(), SensorEventListener {
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
 
     }
+
     fun resetStepsManually() {
         mBinding.numberOfSteps.setOnClickListener {
             Toast.makeText(requireActivity(), "Long press to reset steps", Toast.LENGTH_SHORT)
@@ -361,12 +331,13 @@ class HomeFragment : Fragment(), SensorEventListener {
         }
         mBinding.numberOfSteps.setOnLongClickListener {
             val sharedPrefs =
-               activity?.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+                activity?.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val editor = sharedPrefs?.edit()
             editor?.putString("walkingSteps", "0")
             editor?.apply()
             mBinding.tvTotalSteps.text = 0.toString()
             totalSteps = 0F
+            TrackingService.totalSteps = 0F
             mBinding.progressBarSteps.progress = 0F
             mBinding.tvCaloriesBurned.text = burnedCalories(totalSteps.toInt()).toString()
             mBinding.stepsPercentageOfGoal.text = "0% of Goal"
@@ -379,14 +350,16 @@ class HomeFragment : Fragment(), SensorEventListener {
             true
         }
     }
+
     fun percentageOfGoalSteps(steps: Int, goal: Int): Int {
-       val percentage: Int = (100 * steps) / goal
+        val percentage: Int = (100 * steps) / goal
 
 
         return percentage
 
 
     }
+
     fun percentageOfGoalCalories(calories: Int, goal: Int): Int {
         val percentage: Int = (100 * calories) / goal
 
@@ -395,7 +368,6 @@ class HomeFragment : Fragment(), SensorEventListener {
 
 
     }
-
 
 
     fun saveData(steps: Float) {
@@ -414,9 +386,6 @@ class HomeFragment : Fragment(), SensorEventListener {
         previousTotalSteps = savedNum!!.toFloat()
         totalSteps = previousTotalSteps
         mBinding.tvTotalSteps.text = totalSteps.toInt().toString()
-
-
-
         mBinding.tvCaloriesBurned.text = burnedCalories(totalSteps.toInt()).toString()
 
         mBinding.progressBarSteps.apply {
@@ -425,11 +394,10 @@ class HomeFragment : Fragment(), SensorEventListener {
         }
 
 
-
     }
 
 
-    fun burnedCalories(steps: Int) : Int {
+    fun burnedCalories(steps: Int): Int {
         val burnedKcal: Double = steps * 0.045
         val result = burnedKcal.toInt()
         return result
@@ -455,10 +423,6 @@ class HomeFragment : Fragment(), SensorEventListener {
                 dialog.dismiss()
             }.show()
     }
-
-
-
-
 
 
 

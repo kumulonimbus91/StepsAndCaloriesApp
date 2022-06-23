@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -56,7 +57,7 @@ class AddFoodFragment : Fragment() {
         )
         binding.lifecycleOwner = this
 
-
+        //binding.llyChart.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.transparent))
 
 
 

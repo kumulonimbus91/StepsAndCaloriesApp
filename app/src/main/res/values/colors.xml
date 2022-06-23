@@ -42,5 +42,6 @@
     <color name="backgroundButton">#404040</color>
     <color name="buttonDefaultBackground">#1E1E1E</color>
     <color name="cv_backgrounds">#242921</color>
+    <color name="blackA">#66000000</color>
 
 </resources>

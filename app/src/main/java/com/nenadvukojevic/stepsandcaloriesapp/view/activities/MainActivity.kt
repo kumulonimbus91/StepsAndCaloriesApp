@@ -18,6 +18,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.nenadvukojevic.stepsandcaloriesapp.R
 import com.nenadvukojevic.stepsandcaloriesapp.databinding.ActivityMainBinding
 import com.nenadvukojevic.stepsandcaloriesapp.helper.AlarmReceiver
+import com.nenadvukojevic.stepsandcaloriesapp.utils.Constants.ACTION_SHOW_TRACKING_FRAGMENT
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,6 +39,8 @@ class MainActivity : AppCompatActivity() {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+        navigateToTrackingFragmentIfNeeded(intent)
 
 
 
@@ -99,6 +102,16 @@ class MainActivity : AppCompatActivity() {
         val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
         val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
         alarmManager[AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 60000] = pendingIntent
+    }
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        navigateToTrackingFragmentIfNeeded(intent)
+    }
+
+    private fun navigateToTrackingFragmentIfNeeded(intent: Intent?) {
+        if(intent?.action == ACTION_SHOW_TRACKING_FRAGMENT) {
+            navHostFragment.findNavController().navigate(R.id.action_global_homeFragment)
+        }
     }
 
 
