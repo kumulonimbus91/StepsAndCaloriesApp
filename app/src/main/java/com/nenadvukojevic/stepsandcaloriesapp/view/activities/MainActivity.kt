@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.os.PowerManager
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -40,7 +41,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(mBinding.root)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        navigateToTrackingFragmentIfNeeded(intent)
+        //navigateToTrackingFragmentIfNeeded(intent)
+
 
 
 
@@ -61,6 +63,8 @@ class MainActivity : AppCompatActivity() {
         navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val mNavController = navHostFragment.findNavController()
+
+        onNewIntent(intent)
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(

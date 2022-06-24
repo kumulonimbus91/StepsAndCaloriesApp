@@ -197,7 +197,7 @@ class HomeFragment : Fragment(), SensorEventListener {
 
 
 
-                sharedViewModel.foodTotal.observe(viewLifecycleOwner, {
+            sharedViewModel.foodTotal.observe(viewLifecycleOwner, {
 
 
                 mBinding.progressBarCalories.setProgressWithAnimation(it.kcal.toFloat()) //not int when kcal
@@ -238,45 +238,37 @@ class HomeFragment : Fragment(), SensorEventListener {
         }
 
     fun backToIntro() {
-        val builder = androidx.appcompat.app.AlertDialog.Builder(requireActivity())
-        builder.setTitle(resources.getString(R.string.back))
-        builder.setMessage(resources.getString(R.string.are_you_sure))
-        builder.setIcon(R.drawable.ic_baseline_warning_24)
+        val dialog =
+            AlertDialog.Builder(requireActivity()).setTitle(resources.getString(R.string.back))
+                .setMessage(resources.getString(R.string.are_you_sure))
+                .setPositiveButton("GO TO SETTINGS") { dialogInterface, _ ->
+                    try {
+                        val intent = Intent(requireActivity(), IntroActivity::class.java)
 
-        builder.setPositiveButton(resources.getString(R.string.lbl_yes)) { dialogInterface, _ ->
-            val intent = Intent(requireActivity(), IntroActivity::class.java)
+                        val shared: SharedPreferences? =
+                            androidx.preference.PreferenceManager.getDefaultSharedPreferences(
+                                activity?.applicationContext
+                            )
 
-            val shared: SharedPreferences? =
-                androidx.preference.PreferenceManager.getDefaultSharedPreferences(activity?.applicationContext)
+                        val editor = shared?.edit()
+                        editor?.clear()
+                        editor?.apply()
+                        startActivity(intent)
+                        activity?.finish()
+                        dialogInterface.dismiss()
 
-            val editor = shared?.edit()
-            editor?.clear()
-            editor?.apply()
+                        // Dialog will be dismissed
+                    } catch (e: ActivityNotFoundException) {
+                        e.printStackTrace()
+                    }
+                }.setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }.show()
 
-
-
-
-            startActivity(intent)
-            activity?.finish()
-
-
-
-
-
-
-            dialogInterface.dismiss() // Dialog will be dismissed
-
-        }
-        //performing negative action
-        builder.setNegativeButton(resources.getString(R.string.lbl_no)) { dialogInterface, which ->
-            dialogInterface.dismiss() // Dialog will be dismissed
-        }
-
-        // Create the AlertDialog
-        val alertDialog: androidx.appcompat.app.AlertDialog = builder.create()
-        // Set other dialog properties
-        alertDialog.setCancelable(false) // Will not allow user to cancel after clicking on remaining screen area.
-        alertDialog.show()  // show the dialog to UI
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+            .setTextColor(ContextCompat.getColor(requireContext(), R.color.buttonDefaultBackground))
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            .setTextColor(ContextCompat.getColor(requireContext(), R.color.buttonDefaultBackground))
 
 
     }
@@ -404,11 +396,9 @@ class HomeFragment : Fragment(), SensorEventListener {
     }
 
     private fun showRationalDialogForPermissions() {
-        AlertDialog.Builder(requireActivity())
+        val dialog = AlertDialog.Builder(requireActivity())
             .setMessage("It Looks like you have turned off permissions required for this feature. It can be enabled under Application Settings")
-            .setPositiveButton(
-                "GO TO SETTINGS"
-            ) { _, _ ->
+            .setPositiveButton("GO TO SETTINGS") { _, _ ->
                 try {
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                     val uri = Uri.fromParts("package", activity?.packageName, null)
@@ -417,14 +407,17 @@ class HomeFragment : Fragment(), SensorEventListener {
                 } catch (e: ActivityNotFoundException) {
                     e.printStackTrace()
                 }
-            }
-            .setNegativeButton("Cancel") { dialog,
-                                           _ ->
+            }.setNegativeButton("Cancel") { dialog, _ ->
                 dialog.dismiss()
             }.show()
+
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+            .setTextColor(ContextCompat.getColor(requireContext(), R.color.buttonDefaultBackground))
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            .setTextColor(ContextCompat.getColor(requireContext(), R.color.buttonDefaultBackground))
+
+
     }
-
-
 
 
 }

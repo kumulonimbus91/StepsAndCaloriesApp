@@ -12,6 +12,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
 import android.os.IBinder
+import android.os.PowerManager
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -55,6 +56,12 @@ class TrackingService : LifecycleService(), SensorEventListener {
             sensorManager?.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_NORMAL)
         }
 
+        val pm: PowerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+        val wl  = pm.newWakeLock(
+            PowerManager.PARTIAL_WAKE_LOCK,
+            "AppName:tag")
+        wl.acquire()
+
     }
     private var previousTotalSteps = 0f
 
@@ -82,6 +89,7 @@ class TrackingService : LifecycleService(), SensorEventListener {
         }
         return super.onStartCommand(intent, flags, startId)
     }
+
     private fun startForegroundService() {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)
                 as NotificationManager
@@ -101,7 +109,7 @@ class TrackingService : LifecycleService(), SensorEventListener {
             .setOngoing(true)
             .setSmallIcon(R.drawable.ic_baseline_directions_walk_24)
             .setContentTitle("Steps")
-            .setContentText(steps)
+            .setContentText("Counting steps...")
             .setContentIntent(getMainActivityPendingIntent())
 
         startForeground(NOTIFICATION_ID, notificationBuilder.build())

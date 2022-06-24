@@ -21,7 +21,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val currentCalendar: Calendar = Calendar.getInstance()
         val currentTime: Date = currentCalendar.getTime()
         val setCalendar: Calendar = Calendar.getInstance()
-        setCalendar.set(Calendar.HOUR_OF_DAY, 0)
+        setCalendar.set(Calendar.HOUR_OF_DAY,0)
         setCalendar.set(Calendar.MINUTE, 0)
         setCalendar.set(Calendar.SECOND, 0)
         val setTime: Date = setCalendar.getTime()
