@@ -1,4 +1,5 @@
 package com.nenadvukojevic.stepsandcaloriesapp.viewmodel
+
 import android.app.Application
 import android.content.Context
 import android.widget.Toast
@@ -17,13 +18,12 @@ import kotlinx.coroutines.*
 class AddFoodViewModel(
     food: Food,
     val datasource: FoodDatabaseDao,
-    app: Application) : AndroidViewModel(app) {
+    app: Application
+) : AndroidViewModel(app) {
 
     /** COROUTINES */
     private var viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main +  viewModelJob)
-
-
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
 
     /** BINDABLES */
@@ -57,7 +57,10 @@ class AddFoodViewModel(
         if (gramsString.isEmpty()) {
             app.applicationContext.getString(R.string.format_grams, "0".toDouble())
         } else {
-            app.applicationContext.getString(R.string.format_grams, gramsString.toDouble().times(carbsPerOneGram))
+            app.applicationContext.getString(
+                R.string.format_grams,
+                gramsString.toDouble().times(carbsPerOneGram)
+            )
         }
     }
 
@@ -67,7 +70,10 @@ class AddFoodViewModel(
         if (gramsString.isEmpty()) {
             app.applicationContext.getString(R.string.format_grams, "0".toDouble())
         } else {
-            app.applicationContext.getString(R.string.format_grams, gramsString.toDouble().times(proteinsPerOneGram))
+            app.applicationContext.getString(
+                R.string.format_grams,
+                gramsString.toDouble().times(proteinsPerOneGram)
+            )
         }
     }
 
@@ -77,7 +83,10 @@ class AddFoodViewModel(
         if (gramsString.isEmpty()) {
             app.applicationContext.getString(R.string.format_grams, "0".toDouble())
         } else {
-            app.applicationContext.getString(R.string.format_grams, gramsString.toDouble().times(fatsPerOneGram))
+            app.applicationContext.getString(
+                R.string.format_grams,
+                gramsString.toDouble().times(fatsPerOneGram)
+            )
         }
     }
 
@@ -87,7 +96,10 @@ class AddFoodViewModel(
         if (gramsString.isEmpty()) {
             app.applicationContext.getString(R.string.format_total_kcal, "0".toDouble())
         } else {
-            app.applicationContext.getString(R.string.format_total_kcal, gramsString.toDouble().times(kcalPerOneGram))
+            app.applicationContext.getString(
+                R.string.format_total_kcal,
+                gramsString.toDouble().times(kcalPerOneGram)
+            )
         }
     }
 
@@ -146,10 +158,8 @@ class AddFoodViewModel(
     }
 
     fun showToast(context: Context) {
-        Toast.makeText( context, "Food added", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Food added", Toast.LENGTH_SHORT).show()
     }
-
-
 
 
 }

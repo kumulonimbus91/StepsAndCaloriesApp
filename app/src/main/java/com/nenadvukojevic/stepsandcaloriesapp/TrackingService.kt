@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.SharedPreferences
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -26,7 +27,9 @@ import com.nenadvukojevic.stepsandcaloriesapp.utils.Constants.NOTIFICATION_CHANN
 import com.nenadvukojevic.stepsandcaloriesapp.utils.Constants.NOTIFICATION_CHANNEL_NAME
 import com.nenadvukojevic.stepsandcaloriesapp.utils.Constants.NOTIFICATION_ID
 import com.nenadvukojevic.stepsandcaloriesapp.view.activities.MainActivity
+import com.nenadvukojevic.stepsandcaloriesapp.view.fragments.HomeFragment
 import timber.log.Timber
+import java.util.*
 
 class TrackingService : LifecycleService(), SensorEventListener {
 
@@ -61,6 +64,29 @@ class TrackingService : LifecycleService(), SensorEventListener {
             PowerManager.PARTIAL_WAKE_LOCK,
             "AppName:tag")
         wl.acquire()
+
+        val currentCalendar: Calendar = Calendar.getInstance()
+        val currentTime: Date = currentCalendar.getTime()
+        val setCalendar: Calendar = Calendar.getInstance()
+        setCalendar.set(Calendar.HOUR_OF_DAY,0)
+        setCalendar.set(Calendar.MINUTE, 0)
+        setCalendar.set(Calendar.SECOND, 0)
+        val setTime: Date = setCalendar.getTime()
+
+        val sharedPrefs: SharedPreferences =
+            getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+
+        val editor = sharedPrefs?.edit()
+        if (currentTime.after(setTime)) {
+
+        } else {
+            HomeFragment.totalSteps = 0F
+            totalSteps = 0F
+            editor.putString("walkingSteps", "0")
+            editor.apply()
+
+
+        }
 
     }
     private var previousTotalSteps = 0f

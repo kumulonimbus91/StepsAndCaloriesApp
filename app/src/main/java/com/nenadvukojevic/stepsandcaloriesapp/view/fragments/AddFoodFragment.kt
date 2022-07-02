@@ -32,12 +32,8 @@ class AddFoodFragment : Fragment() {
     val bundle = Bundle()
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
 
 
     }
@@ -60,10 +56,6 @@ class AddFoodFragment : Fragment() {
         //binding.llyChart.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.transparent))
 
 
-
-
-
-
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         return binding.root
 
@@ -78,25 +70,13 @@ class AddFoodFragment : Fragment() {
 
         val viewModelFactory = AddFoodViewModelFactory(food, dataSource, application)
 
-        val viewModel =  ViewModelProvider(this, viewModelFactory).get(AddFoodViewModel::class.java)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(AddFoodViewModel::class.java)
 
 
         binding.viewModel = viewModel
 
 
-
-
-
-
-
-
-
-
-
-        
     }
-
-
 
 
 }

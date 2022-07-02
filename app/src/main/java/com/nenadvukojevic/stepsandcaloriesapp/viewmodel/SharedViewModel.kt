@@ -1,16 +1,21 @@
 package com.nenadvukojevic.stepsandcaloriesapp.viewmodel
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.*
 import com.nenadvukojevic.stepsandcaloriesapp.R
 import com.nenadvukojevic.stepsandcaloriesapp.getCurrentDayString
 import com.nenadvukojevic.stepsandcaloriesapp.model.database.FoodDatabaseDao
 import com.nenadvukojevic.stepsandcaloriesapp.model.database.FoodModel
+import com.nenadvukojevic.stepsandcaloriesapp.view.fragments.HomeFragment
 import kotlinx.coroutines.*
 
-class SharedViewModel(val database: FoodDatabaseDao,
-                      app: Application
-): AndroidViewModel(app) {
+class SharedViewModel(
+    val database: FoodDatabaseDao,
+    app: Application
+) : AndroidViewModel(app) {
 
     private var calories = MutableLiveData<Int>(0)
     val caloriesToRead: LiveData<Int> = calories
@@ -21,7 +26,7 @@ class SharedViewModel(val database: FoodDatabaseDao,
     }
 
     private var viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main +  viewModelJob)
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     var dateSelected = MutableLiveData(getCurrentDayString())
     fun setDateSelected(newDate: String) {
@@ -89,7 +94,6 @@ class SharedViewModel(val database: FoodDatabaseDao,
     }
 
 
-
     private suspend fun deleteFood(foodModel: FoodModel) {
         withContext(Dispatchers.IO) {
             database.deleteFood(foodModel)
@@ -101,11 +105,13 @@ class SharedViewModel(val database: FoodDatabaseDao,
             deleteFood(foodModel)
         }
     }
+
     override fun onCleared() {
         super.onCleared()
         // cancel all coroutines
         viewModelJob.cancel()
     }
+
     fun calculateCaloriesMetric(
         gender: String?,
         weightMetric: Int?,
@@ -266,7 +272,37 @@ class SharedViewModel(val database: FoodDatabaseDao,
         return steps
     }
 
+    fun percentageOfGoalSteps(steps: Int, goal: Int): Int {
+        val percentage: Int = (100 * steps) / goal
 
+
+        return percentage
+
+
+    }
+
+    fun percentageOfGoalCalories(calories: Int, goal: Int): Int {
+        val percentage: Int = (100 * calories) / goal
+
+
+        return percentage
+
+
+    }
+
+    fun saveData(steps: Float) {
+        val sharedPrefs =
+            getApplication<Application>().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPrefs?.edit()
+        editor?.putString("walkingSteps", steps.toString())
+        editor?.apply()
+    }
+
+    fun burnedCalories(steps: Int): Int {
+        val burnedKcal: Double = steps * 0.045
+        val result = burnedKcal.toInt()
+        return result
+    }
 
 
 }

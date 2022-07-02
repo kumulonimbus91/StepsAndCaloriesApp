@@ -34,12 +34,10 @@ class CaloriesViewModel : ViewModel() {
     }
 
 
-
-
-   fun getSearchFoodResponse() {
+    fun getSearchFoodResponse() {
         if (word.value == "" || word.value == null)
             return
-       searchInProgress.value = true
+        searchInProgress.value = true
         viewModelScope.launch {
             val responseDeffered = ApiService.retrofitService.getSpecificFoodAsync(
                 word.value ?: "",

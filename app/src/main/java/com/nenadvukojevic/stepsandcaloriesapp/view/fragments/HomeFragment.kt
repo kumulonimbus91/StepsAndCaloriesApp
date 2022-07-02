@@ -91,7 +91,8 @@ class HomeFragment : Fragment(), SensorEventListener {
         val application = requireNotNull(activity).application
         val dataSource = FoodDatabase.getInstance(application).foodDatabaseDao
         val shareViewModelFactory = SharedViewModelFactory(dataSource, application)
-
+        sharedViewModel =
+            ViewModelProvider(this, shareViewModelFactory).get(SharedViewModel::class.java)
 
 
         if (ContextCompat.checkSelfPermission(
@@ -118,10 +119,6 @@ class HomeFragment : Fragment(), SensorEventListener {
 
 
         sendCommandToService(Constants.ACTION_START_OR_RESUME_SERVICE)
-
-
-        sharedViewModel =
-            ViewModelProvider(this, shareViewModelFactory).get(SharedViewModel::class.java)
 
 
         val shared: SharedPreferences? =
@@ -155,13 +152,15 @@ class HomeFragment : Fragment(), SensorEventListener {
 
             val value = 0
 
-            val percentageSteps = percentageOfGoalSteps(totalSteps.toInt(), txtSteps!!.toInt())
+            val percentageSteps =
+                sharedViewModel.percentageOfGoalSteps(totalSteps.toInt(), txtSteps!!.toInt())
             mBinding.stepsPercentageOfGoal.text = percentageSteps.toString() + "% of Goal"
-            mBinding.tvCaloriesBurned.text = burnedCalories(totalSteps.toInt()).toString()
+            mBinding.tvCaloriesBurned.text =
+                sharedViewModel.burnedCalories(totalSteps.toInt()).toString()
 
 
 
-            sharedViewModel.foodTotal.observe(viewLifecycleOwner, {
+            sharedViewModel.foodTotal.observe(viewLifecycleOwner) {
 
 
                 mBinding.progressBarCalories.setProgressWithAnimation(it.kcal.toFloat())
@@ -169,11 +168,12 @@ class HomeFragment : Fragment(), SensorEventListener {
                 mBinding.tvTotalCalories.text = it.kcal.toString()
 
 
-                val percentageCalories = percentageOfGoalCalories(it.kcal, txtKcal!!.toInt())
+                val percentageCalories =
+                    sharedViewModel.percentageOfGoalCalories(it.kcal, txtKcal!!.toInt())
                 mBinding.caloriesPercentageOfGoal.text = percentageCalories.toString() + "% of Goal"
 
 
-            })
+            }
 
 
         } else if (units == "USUNITS") {
@@ -190,14 +190,16 @@ class HomeFragment : Fragment(), SensorEventListener {
             mBinding.progressBarCalories.progressMax = txtKcal!!.toFloat()
             mBinding.progressBarSteps.progressMax = txtSteps!!.toFloat()
 
-            val percentageSteps = percentageOfGoalSteps(totalSteps.toInt(), txtSteps!!.toInt())
+            val percentageSteps =
+                sharedViewModel.percentageOfGoalSteps(totalSteps.toInt(), txtSteps!!.toInt())
             mBinding.stepsPercentageOfGoal.text = percentageSteps.toString() + "% of Goal"
-            mBinding.tvCaloriesBurned.text = burnedCalories(totalSteps.toInt()).toString()
+            mBinding.tvCaloriesBurned.text =
+                sharedViewModel.burnedCalories(totalSteps.toInt()).toString()
 
 
 
 
-            sharedViewModel.foodTotal.observe(viewLifecycleOwner, {
+            sharedViewModel.foodTotal.observe(viewLifecycleOwner) {
 
 
                 mBinding.progressBarCalories.setProgressWithAnimation(it.kcal.toFloat()) //not int when kcal
@@ -205,11 +207,12 @@ class HomeFragment : Fragment(), SensorEventListener {
                 mBinding.tvTotalCalories.text = it.kcal.toString()
 
 
-                val percentageCalories = percentageOfGoalCalories(it.kcal, txtKcal!!.toInt())
+                val percentageCalories =
+                    sharedViewModel.percentageOfGoalCalories(it.kcal, txtKcal!!.toInt())
                 mBinding.caloriesPercentageOfGoal.text = percentageCalories.toString() + "% of Goal"
 
 
-            })
+            }
 
 
         }
@@ -296,11 +299,13 @@ class HomeFragment : Fragment(), SensorEventListener {
 
         if (sensor.type == Sensor.TYPE_STEP_DETECTOR) {
             totalSteps++
-            saveData(totalSteps)
+            sharedViewModel.saveData(totalSteps)
             val currentSteps = totalSteps.toInt()
             mBinding.tvTotalSteps.text = ("$currentSteps")
-            mBinding.tvCaloriesBurned.text = burnedCalories(totalSteps.toInt()).toString()
-            val percentageSteps = percentageOfGoalSteps(totalSteps.toInt(), txtSteps!!.toInt())
+            mBinding.tvCaloriesBurned.text =
+                sharedViewModel.burnedCalories(totalSteps.toInt()).toString()
+            val percentageSteps =
+                sharedViewModel.percentageOfGoalSteps(totalSteps.toInt(), txtSteps!!.toInt())
             mBinding.stepsPercentageOfGoal.text = percentageSteps.toString() + "% of Goal"
 
             mBinding.progressBarSteps.apply {
@@ -331,43 +336,17 @@ class HomeFragment : Fragment(), SensorEventListener {
             totalSteps = 0F
             TrackingService.totalSteps = 0F
             mBinding.progressBarSteps.progress = 0F
-            mBinding.tvCaloriesBurned.text = burnedCalories(totalSteps.toInt()).toString()
+            mBinding.tvCaloriesBurned.text =
+                sharedViewModel.burnedCalories(totalSteps.toInt()).toString()
             mBinding.stepsPercentageOfGoal.text = "0% of Goal"
 
 
 
 
-            saveData(totalSteps)
+            sharedViewModel.saveData(totalSteps)
 
             true
         }
-    }
-
-    fun percentageOfGoalSteps(steps: Int, goal: Int): Int {
-        val percentage: Int = (100 * steps) / goal
-
-
-        return percentage
-
-
-    }
-
-    fun percentageOfGoalCalories(calories: Int, goal: Int): Int {
-        val percentage: Int = (100 * calories) / goal
-
-
-        return percentage
-
-
-    }
-
-
-    fun saveData(steps: Float) {
-        val sharedPrefs =
-            activity?.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-        val editor = sharedPrefs?.edit()
-        editor?.putString("walkingSteps", steps.toString())
-        editor?.apply()
     }
 
     private fun loadData() {
@@ -378,7 +357,8 @@ class HomeFragment : Fragment(), SensorEventListener {
         previousTotalSteps = savedNum!!.toFloat()
         totalSteps = previousTotalSteps
         mBinding.tvTotalSteps.text = totalSteps.toInt().toString()
-        mBinding.tvCaloriesBurned.text = burnedCalories(totalSteps.toInt()).toString()
+        mBinding.tvCaloriesBurned.text =
+            sharedViewModel.burnedCalories(totalSteps.toInt()).toString()
 
         mBinding.progressBarSteps.apply {
             setProgressWithAnimation(totalSteps)
@@ -388,12 +368,6 @@ class HomeFragment : Fragment(), SensorEventListener {
 
     }
 
-
-    fun burnedCalories(steps: Int): Int {
-        val burnedKcal: Double = steps * 0.045
-        val result = burnedKcal.toInt()
-        return result
-    }
 
     private fun showRationalDialogForPermissions() {
         val dialog = AlertDialog.Builder(requireActivity())

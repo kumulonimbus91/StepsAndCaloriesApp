@@ -19,11 +19,9 @@ import com.nenadvukojevic.stepsandcaloriesapp.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
 
-   private lateinit var splashBinding: ActivitySplashBinding
+    private lateinit var splashBinding: ActivitySplashBinding
 
-   private lateinit var sharedPrefs: SharedPreferences
-
-
+    private lateinit var sharedPrefs: SharedPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,12 +54,13 @@ class SplashActivity : AppCompatActivity() {
                 Handler(Looper.getMainLooper()).postDelayed({
 
 
-
                     sharedPrefs = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
 //                    val isFirstRun: SharedPreferences = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                     val firstTime: String? = sharedPrefs.getString("FirstLaunch", "Yes")
                     val shared: SharedPreferences? =
-                        androidx.preference.PreferenceManager.getDefaultSharedPreferences(applicationContext)
+                        androidx.preference.PreferenceManager.getDefaultSharedPreferences(
+                            applicationContext
+                        )
 
                     val genderDefault: String = "default"
 
@@ -74,18 +73,13 @@ class SplashActivity : AppCompatActivity() {
                         val intent = Intent(this@SplashActivity, IntroActivity::class.java)
                         startActivity(intent)
                         finish()
-                        } else {
-                        val intent = Intent (this@SplashActivity, MainActivity::class.java)
+                    } else {
+                        val intent = Intent(this@SplashActivity, MainActivity::class.java)
                         startActivity(intent)
                         finish()
 
 
-
                     }
-
-
-
-
 
 
                 }, 1000)
@@ -98,18 +92,7 @@ class SplashActivity : AppCompatActivity() {
         })
 
 
-
-
-
-
-
     }
-
-
-
-
-
-
 
 
 }

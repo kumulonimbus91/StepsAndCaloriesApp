@@ -23,14 +23,18 @@ class BellyFragment : Fragment() {
     private lateinit var sharedViewModel: SharedViewModel
 
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-
-
-
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        binding = DataBindingUtil.inflate<FragmentBellyBinding>(inflater, R.layout.fragment_belly, container, false)
+        binding = DataBindingUtil.inflate<FragmentBellyBinding>(
+            inflater,
+            R.layout.fragment_belly,
+            container,
+            false
+        )
         binding.lifecycleOwner = this
 
 
@@ -54,21 +58,15 @@ class BellyFragment : Fragment() {
         val sharedViewModelFactory = SharedViewModelFactory(dataSource, application)
 
 
-        sharedViewModel = ViewModelProvider(this, sharedViewModelFactory).get(SharedViewModel::class.java)
-
-
-
-
-
-
-
+        sharedViewModel =
+            ViewModelProvider(this, sharedViewModelFactory).get(SharedViewModel::class.java)
 
 
         val adapter = BellyAdapter(BellyAdapter.OnBtnDeleteListener {
-           sharedViewModel.onDeleteChoosedFood(it)
+            sharedViewModel.onDeleteChoosedFood(it)
         })
 
-        sharedViewModel.foodTotal.observe(viewLifecycleOwner,{
+        sharedViewModel.foodTotal.observe(viewLifecycleOwner) {
 
             val percent: String = "%"
 
@@ -78,25 +76,18 @@ class BellyFragment : Fragment() {
             binding.tvCurrentFats.setText(it.fatPercent.toString() + "%")
 
 
-
-
-
-        })
+        }
 
         binding.rvBelly.adapter = adapter
 
-       sharedViewModel.foods.observe(viewLifecycleOwner, {
+        sharedViewModel.foods.observe(viewLifecycleOwner) {
             it?.let {
                 adapter.data = it
 
 
             }
-        })
+        }
     }
-
-
-
-
 
 
 }

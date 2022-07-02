@@ -28,17 +28,18 @@ class AlarmReceiver : BroadcastReceiver() {
 
         val sharedPrefs: SharedPreferences =
             context!!.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-        var savedNum: kotlin.String? = sharedPrefs!!.getString("walkingSteps", "0")
+
         val editor = sharedPrefs?.edit()
 
         if (currentTime.after(setTime)) {
-// do another task
+
         } else {
 
             dataSource.deleteAll()
-            editor.remove("walkingSteps")
-            //editor.clear()
-            editor?.putString("walkingSteps", "0")
+            HomeFragment.totalSteps = 0F
+            TrackingService.totalSteps = 0F
+            editor.putString("walkingSteps", "")
+            editor.clear()
             editor.apply()
 
 

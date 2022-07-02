@@ -27,8 +27,6 @@ class IntroActivity : AppCompatActivity() {
     private lateinit var sharedPrefs: SharedPreferences
 
 
-
-
     var currentVisibleView: String =
         METRIC_UNITS_VIEW // A variable to hold a value to make visible a selected view
 
@@ -56,7 +54,6 @@ class IntroActivity : AppCompatActivity() {
         val rgGroupGender = mBinding.rgGender
         val rgGroupGoal = mBinding.rgGoal
         val rgUnits = mBinding.rgUnits
-
 
 
         var extraGender: String
@@ -240,23 +237,10 @@ class IntroActivity : AppCompatActivity() {
             }
 
 
-
-
-
-
-
-
-
-
         }
 
 
-
-
-
-
     }
-
 
 
     private fun validateMetricUnits(): Boolean {
@@ -295,6 +279,7 @@ class IntroActivity : AppCompatActivity() {
         return id == R.id.rb_male || id == R.id.rb_female
 
     }
+
     private fun checkGoal(): Boolean {
         val id: Int = mBinding.rgGoal.checkedRadioButtonId
         return id == R.id.rb_lose || id == R.id.rb_lose_heavy || id == R.id.rb_maintain
@@ -330,15 +315,6 @@ class IntroActivity : AppCompatActivity() {
 
 
     }
-
-
-
-
-
-
-
-
-
 
 
 }

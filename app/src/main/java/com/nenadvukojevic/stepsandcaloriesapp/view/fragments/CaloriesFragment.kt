@@ -42,12 +42,9 @@ class CaloriesFragment : Fragment() {
 
     private lateinit var binding: FragmentCaloriesBinding
 
-    private val MainActivity = com.nenadvukojevic.stepsandcaloriesapp.view.activities.MainActivity ()
+    private val MainActivity = com.nenadvukojevic.stepsandcaloriesapp.view.activities.MainActivity()
 
     private var mInterstitialAd: InterstitialAd? = null
-
-
-
 
 
     private val caloriesViewModel: CaloriesViewModel by lazy {
@@ -55,7 +52,6 @@ class CaloriesFragment : Fragment() {
     }
 
     val bundle: Bundle? = null
-
 
 
     private var viewModelJob = Job()
@@ -85,23 +81,26 @@ class CaloriesFragment : Fragment() {
         binding.adView.loadAd(adRequest)
 
 
-        InterstitialAd.load(requireActivity(), "ca-app-pub-4256849898367595/9826413857", adRequest, object: InterstitialAdLoadCallback(){
-            override fun onAdFailedToLoad(p0: LoadAdError) {
-                Log.d(TAG, p0?.message)
-                mInterstitialAd = null
-            }
+        InterstitialAd.load(
+            requireActivity(),
+            "ca-app-pub-4256849898367595/9826413857",
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(p0: LoadAdError) {
+                    Log.d(TAG, p0?.message)
+                    mInterstitialAd = null
+                }
 
-            override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                super.onAdLoaded(interstitialAd)
-                Log.d(TAG, "Ad was loaded.")
-                mInterstitialAd = interstitialAd
-            }
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    super.onAdLoaded(interstitialAd)
+                    Log.d(TAG, "Ad was loaded.")
+                    mInterstitialAd = interstitialAd
+                }
 
 
+            })
 
-        })
-
-        mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback () {
+        mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdDismissedFullScreenContent() {
                 super.onAdDismissedFullScreenContent()
                 Log.d(TAG, "Ad was dismissed.")
@@ -158,7 +157,7 @@ class CaloriesFragment : Fragment() {
 
         caloriesViewModel.navigateToSelectedFood.observe(viewLifecycleOwner, Observer {
             if (it != null) {
-               this.findNavController()
+                this.findNavController()
                     .navigate(CaloriesFragmentDirections.actionCaloriesFragmentToAddFoodFr(it))
                 // tell the viewModel we've made the navigate call
                 caloriesViewModel.displayAddFoodIsComplete()
@@ -190,14 +189,13 @@ class CaloriesFragment : Fragment() {
 
     }
 
-    fun showFullAd(){
+    fun showFullAd() {
         if (mInterstitialAd != null) {
             mInterstitialAd?.show(requireActivity())
         } else {
             Log.d("TAG", "The interstitial ad wasn't ready yet.")
         }
     }
-
 
 
 }
